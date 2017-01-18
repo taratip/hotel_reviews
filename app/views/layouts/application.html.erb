@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "Hotel Reviews" %></title>
+
+    <%= stylesheet_link_tag    "application", media: 'all' %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= csrf_meta_tags %>
+  </head>
+
+  <body>
+    <div class="contain-to-grid">
+      <nav class="top-bar" data-topbar role="navigation">
+        <Ul class="title-area">
+          <li class="name">
+            <h1><%= link_to "Hotel Reviews", hotels_path %></h1>
+          </li>
+        </ul>
+        <section class="top-bar-section">
+          <ul class="right">
+            <% if current_user %>
+              <li><%= link_to 'Sign out', destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to 'Sign in', new_user_session_path %></li>
+              <li><%= link_to "Sign up", new_user_registration_path %></li>
+            <% end %>
+          </ul>
+      </nav>
+    </div>
+    <% flash.each do |type, message| %>
+      <div data-alert class="alert-box <%= type %>">
+        <%= message %>
+        <%= link_to "x", "#", class: :close %>
+      </div>
+    <% end %>
+    <div class="row">
+      <div class="small-12 columns">
+        <%= yield %>
+      </div>
+    </div>
+  </body>
+</html>
