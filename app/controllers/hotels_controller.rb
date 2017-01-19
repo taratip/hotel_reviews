@@ -38,6 +38,12 @@ class HotelsController < ApplicationController
     end
   end
 
+  def destroy
+    Hotel.find(params[:id]).destroy
+
+    redirect_to hotels_path, notice: 'The hotel was deleted.'
+  end
+
   private
   def hotel_params
     params.require(:hotel).permit(
