@@ -1,1 +1,5 @@
 <h1>Hotels</h1>
+<%= current_user %>
+<% if !current_user.nil? %>
+  <%= link_to 'Add new hotel', new_hotel_path %>
+<% end %>
