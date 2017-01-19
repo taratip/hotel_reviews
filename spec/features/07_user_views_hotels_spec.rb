@@ -23,4 +23,13 @@ feature 'user views hotels', %q(
     expect(page).to have_content(hotel1.name)
     expect(page).to have_content(hotel2.name)
   end
+
+  scenario 'user view hotel details' do
+    visit "/"
+
+    click_link hotel1.name
+
+    expect(page).to have_content(hotel1.name)
+    expect(page).to have_content(hotel1.address)
+  end
 end

@@ -13,6 +13,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'foundation-rails'
+gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
   gem 'pry-rails'
