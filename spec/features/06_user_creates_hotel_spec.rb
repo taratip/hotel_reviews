@@ -11,7 +11,7 @@ feature 'user adds hotel', %q(
   scenario 'authenticated user can add new hotel' do
     sign_in user
     visit root_path
-    
+
     expect(page).to have_link('Add new hotel')
   end
 
@@ -22,7 +22,7 @@ feature 'user adds hotel', %q(
     fill_in 'Name', with: 'Harbor Park Hotel'
     fill_in 'Address', with: '217, Jemullyang-ro, Jung-gu, Incheon, Incheon, 400-033, South Korea'
     fill_in 'Number of rooms', with: '270'
-    click_button 'Add hotel'
+    click_button 'Save'
 
     expect(page).to have_content('Hotel was successfully created.')
   end
@@ -34,7 +34,7 @@ feature 'user adds hotel', %q(
     fill_in 'Name', with: 'Harbor Park Hotel'
     fill_in 'Address', with: ''
     fill_in 'Number of rooms', with: '270'
-    click_button 'Add hotel'
+    click_button 'Save'
 
     expect(page).to have_content("Address can't be blank")
     expect(page).to have_field("Name", with: "Harbor Park Hotel")

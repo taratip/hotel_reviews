@@ -1,3 +1,4 @@
+require 'pry'
 class HotelsController < ApplicationController
   def index
     @hotels = Hotel.all
@@ -22,13 +23,29 @@ class HotelsController < ApplicationController
     end
   end
 
+  def edit
+    @hotel = Hotel.find(params[:id])
+  end
+
+  def update
+    @hotel = Hotel.find(params[:id])
+    @hotel.user = current_user
+
+    if @hotel.update_attributes(hotel_params)
+      redirect_to hotels_path, notice: 'Hotel was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
   private
   def hotel_params
     params.require(:hotel).permit(
       :name,
       :address,
       :description,
-      :number_rooms
+      :number_rooms,
+      :image
     )
   end
 end

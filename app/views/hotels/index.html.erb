@@ -1,12 +1,20 @@
 <h1>Hotels</h1>
 
-<ul>
-  <% @hotels.each do |hotel| %>
-    <li><%= link_to hotel.name, hotel_path(hotel) %></li>
-  <% end %>
-</ul>
+<% @hotels.each do |hotel| %>
+  <div class="small-12 columns">
+    <hr />
+    <div class="row">
+      <div class="small-4 columns">
+        <%= image_tag hotel.image %>
+      </div>
+      <div class="small-8 columns">
+        <p>Name: <%= link_to hotel.name, hotel %></p>
+        <p>Description: <%= hotel.description %></p>
+      </div>
+    </div>
+  </div>
+<% end %>
 
-<%= current_user %>
 <% if !current_user.nil? %>
   <%= link_to 'Add new hotel', new_hotel_path %>
 <% end %>

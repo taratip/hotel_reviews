@@ -4,7 +4,7 @@ class CreateHotels < ActiveRecord::Migration[5.0]
       t.belongs_to :user, null: false
       t.string :name, null: false
       t.string :address, null: false
-      t.string :description
+      t.text :description
       t.integer :number_rooms
 
       t.timestamps null: false
