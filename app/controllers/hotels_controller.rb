@@ -1,11 +1,13 @@
 require 'pry'
 class HotelsController < ApplicationController
+  before_action :set_hotel, only: [:show, :edit, :update, :destroy]
+
   def index
     @hotels = Hotel.all
   end
 
   def show
-    @hotel = Hotel.find(params[:id])
+    @review = @hotel.reviews.build
   end
 
   def new
@@ -24,11 +26,9 @@ class HotelsController < ApplicationController
   end
 
   def edit
-    @hotel = Hotel.find(params[:id])
   end
 
   def update
-    @hotel = Hotel.find(params[:id])
     @hotel.user = current_user
 
     if @hotel.update_attributes(hotel_params)
@@ -39,12 +39,16 @@ class HotelsController < ApplicationController
   end
 
   def destroy
-    Hotel.find(params[:id]).destroy
+    @hotel.destroy
 
     redirect_to hotels_path, notice: 'The hotel was deleted.'
   end
 
   private
+  def set_hotel
+    @hotel = Hotel.find(params[:id])
+  end
+
   def hotel_params
     params.require(:hotel).permit(
       :name,

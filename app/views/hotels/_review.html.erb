@@ -1,0 +1,6 @@
+<h3><%= review.rating %></h3>
+<p><%= review.body %></p>
+<% if !review.id.nil? && current_user && current_user == review.user %>
+  <%= link_to "Update", edit_review_path(review.id) %>
+  <%= link_to "Delete", review, method: :delete %>
+<% end %>
