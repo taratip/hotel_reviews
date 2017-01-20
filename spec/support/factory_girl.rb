@@ -13,4 +13,12 @@ FactoryGirl.define do
 
     user
   end
+
+  factory :review do
+    rating 4
+    sequence(:body) { |n| "great location nears transporation #{100 + n}!"}
+
+    user
+    hotel
+  end
 end
