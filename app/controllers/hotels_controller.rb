@@ -1,7 +1,7 @@
 require 'pry'
 class HotelsController < ApplicationController
   before_action :set_hotel, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, except: [:index, :show]
+  before_action :authenticate_user, except: [:index, :show, :search]
 
   def index
     @hotels = Hotel.all
@@ -49,6 +49,13 @@ class HotelsController < ApplicationController
     else
       render :file => "#{Rails.root}/public/404.html",  :status => 404
     end
+  end
+
+  def search
+    query = "%#{params[:query].downcase}%"
+    @hotels = Hotel
+              .where('lower(name) like ? or lower(address) like ? or lower(description) like ?',
+              query, query, query)
   end
 
   private

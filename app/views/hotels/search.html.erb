@@ -1,0 +1,17 @@
+<h1>Search Results</h1>
+<br />
+<% if @hotels.empty? %>
+<p>No results found.</p>
+<% else %>
+<p><%= "#{@hotels.count} result(s) found." %></p>
+
+<div class="records">
+  <ul class="unstyled">
+    <% @hotels.each do |hotel| %>
+      <li>
+        <%= link_to hotel.name, hotel %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
