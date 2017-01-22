@@ -21,4 +21,11 @@ FactoryGirl.define do
     user
     hotel
   end
+
+  factory :vote do
+    score 1
+
+    user
+    review
+  end
 end

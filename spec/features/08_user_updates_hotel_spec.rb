@@ -48,10 +48,19 @@ feature 'user updates hotel information', %q(
     expect(page).not_to have_link("Edit")
   end
 
+  scenario 'authenticated user cannot edit hotel information posted by other user from url' do
+    sign_in user2
+    visit edit_hotel_path(hotel1)
+
+    fill_in "Name", with: "Hotel Park Korea"
+    click_button "Save"
+
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
+
   scenario 'unauthenticated user attempts to edit hotel information' do
     visit "/"
-    visit hotel_path(hotel1)
 
-    expect(page).not_to have_link("Edit")
+    expect{visit edit_hotel_path(hotel1)}.to raise_error(ActionController::RoutingError)
   end
 end

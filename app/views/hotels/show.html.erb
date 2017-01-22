@@ -11,16 +11,18 @@
   <dd><%= @hotel.number_rooms %></dd>
 </dl>
 <% if !current_user.nil? && @hotel.user == current_user %>
-  <%= link_to "Edit", edit_hotel_path(@hotel) %>
+  <%= link_to "Edit", edit_hotel_path(@hotel) %> |
   <%= link_to "Delete", @hotel, method: :delete %>
 <% end %>
-
-<h2><%= @hotel.reviews.count %> Reviews:</h2>
+<br />&nbsp;
+<h3><%= @hotel.reviews.count %> Reviews:</h3>
 <hr />
 <div id="review">
+  <div class="row">
   <% @hotel.reviews.each do |review| %>
     <%= render partial: "review", object: review %>
   <% end %>
+  </div>
 </div>
 
 <hr />

@@ -16,3 +16,41 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$(function() {
+  let buttonPressed;
+
+  $("input.button.info.tiny.radius").click(function() {
+    buttonPressed = $(this)[0].id;
+  });
+
+  $("form.upvote").submit(function(event) {
+    event.preventDefault();
+
+    let attributes = getAttributes(buttonPressed);
+    var voteCreator = newVoteCreator(attributes);
+    voteCreator.upVote();
+  });
+
+  $("form.downvote").submit(function(event) {
+    event.preventDefault();
+
+    let attributes = getAttributes(buttonPressed);
+    var voteCreator = newVoteCreator(attributes);
+    voteCreator.downVote();
+  });
+
+  $("form.deletevote").submit(function(event) {
+    event.preventDefault();
+
+    let attributes = getAttributes(buttonPressed);
+    var voteCreator = newVoteCreator(attributes);
+    voteCreator.deleteVote();
+  });
+});
+
+let getAttributes = (buttonpressed) => {
+  let idClicked = buttonpressed.substring(buttonpressed.lastIndexOf('-')+1);
+  let attributes = { id: idClicked };
+  return attributes;
+};
