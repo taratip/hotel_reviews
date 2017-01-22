@@ -10,15 +10,19 @@ feature 'admin deletes a hotel' do
     sign_in admin
     visit hotel_path(hotel1)
 
-    expect(page).to have_link('Delete')
+    within "div#hotel" do
+      expect(page).to have_link('Delete')
+    end
   end
 
   scenario 'admin deletes a hotel' do
     sign_in admin
     visit hotel_path(hotel1)
 
-    click_link "Delete"
-
+    within "div#hotel" do
+      click_link "Delete"
+    end
+    
     expect(page).to have_content('The hotel was deleted.')
   end
 end
