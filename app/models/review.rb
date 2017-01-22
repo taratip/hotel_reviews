@@ -3,6 +3,7 @@ class Review < ApplicationRecord
 
   belongs_to :hotel
   belongs_to :user
+  has_many :votes, dependent: :destroy
 
   validates :rating, inclusion: { in: RATINGS }
   validates :hotel, presence: true

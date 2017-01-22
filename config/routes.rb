@@ -8,5 +8,23 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
   end
 
-  resources :reviews, only: [:edit, :update, :destroy]
+  resources :reviews, only: [:edit, :update, :destroy] do
+    member do
+      post 'upvote'
+      post 'downvote'
+      post 'deletevote'
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :reviews, only: [:index] do
+        member do
+          post 'upvote'
+          post 'downvote'
+          post 'deletevote'
+        end
+      end
+    end
+  end
 end

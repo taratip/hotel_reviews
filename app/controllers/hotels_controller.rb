@@ -1,6 +1,7 @@
 require 'pry'
 class HotelsController < ApplicationController
   before_action :set_hotel, only: [:show, :edit, :update, :destroy]
+  before_action :authorize_user, except: [:index, :show]
 
   def index
     @hotels = Hotel.all
@@ -29,12 +30,14 @@ class HotelsController < ApplicationController
   end
 
   def update
-    @hotel.user = current_user
-
-    if @hotel.update_attributes(hotel_params)
-      redirect_to hotels_path, notice: 'Hotel was successfully updated.'
+    if @hotel.user == current_user
+      if @hotel.update_attributes(hotel_params)
+        redirect_to hotels_path, notice: 'Hotel was successfully updated.'
+      else
+        render :edit
+      end
     else
-      render :edit
+      render :file => "#{Rails.root}/public/404.html",  :status => 404
     end
   end
 
@@ -57,5 +60,12 @@ class HotelsController < ApplicationController
       :number_rooms,
       :image
     )
+  end
+
+  def authorize_user
+    if !user_signed_in?
+      raise ActionController::RoutingError.new("Not Found")
+      # render :file => "#{Rails.root}/public/404.html",  :status => 404
+    end
   end
 end

@@ -11,6 +11,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'carrierwave', '~> 1.0'
@@ -24,6 +25,8 @@ group :development, :test do
   gem 'valid_attribute'
   gem 'listen'
   gem 'shoulda-matchers', require: false
+  gem 'teaspoon'
+  gem 'teaspoon-jasmine'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

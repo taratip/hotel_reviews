@@ -36,9 +36,19 @@ feature 'user updates review' do
     expect(page).not_to have_link("Update")
   end
 
-  scenario 'unauthoticated user attempts to update review' do
-    visit hotel_path(hotel)
+  scenario 'authenticated user cannot edit review posted by other user from url' do
+    sign_in user2
+    visit edit_review_path(review)
 
-    expect(page).not_to have_link("Update")
+    fill_in "Review", with: "Not so good"
+    click_button "Update Review"
+
+    expect(page).to have_content("The page you were looking for doesn't exist.")
+  end
+
+  scenario 'unauthoticated user attempts to update review' do
+    visit "/"
+
+    expect{visit edit_review_path(review)}.to raise_error(ActionController::RoutingError)
   end
 end

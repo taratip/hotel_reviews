@@ -1,6 +1,37 @@
-<h3><%= review.rating %></h3>
-<p><%= review.body %></p>
-<% if !review.id.nil? && current_user && current_user == review.user %>
-  <%= link_to "Update", edit_review_path(review.id) %>
-  <%= link_to "Delete", review, method: :delete %>
+<%if !review.id.nil? %>
+  <div id="vote-<%= review.id %>">
+    <div class="row">
+      <div class="medium-1 columns">
+        <span class="secondary label"><%= review.score %></span>
+      </div>
+      <div class="medium-11 columns">
+        <p><strong>Rating: <%= review.rating %></strong> <%= review.body %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="medium-2 columns">
+        <% if current_user && current_user == review.user %>
+          <%= link_to "Update", edit_review_path(review.id) %> |
+          <%= link_to "Delete", review, method: :delete %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="medium-4 columns">
+        <% if current_user %>
+          <div style="float:left; margin:5px;">
+            <%= button_to '+1', upvote_review_path(review), {form_class: 'upvote', class: 'button info tiny radius', id: "upvote-#{review.id}"} %>
+          </div>
+          <div style="float:left; margin:5px;">
+            <%= button_to '-1', downvote_review_path(review), {form_class: 'downvote', class: 'button info tiny radius', id: "downvote-#{review.id}"} %>
+          </div>
+          <div style="float:left; margin:5px;">
+            <%= button_to 'Delete Vote', deletevote_review_path(review), {form_class: 'deletevote', class: 'button info tiny radius', id: "deletevote-#{review.id}"} %>
+          </div>
+          <div style="clear:both;">
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>
