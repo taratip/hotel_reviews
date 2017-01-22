@@ -1,0 +1,14 @@
+<h1>Users</h1>
+
+<ul id="users">
+  <% @users.each do |user| %>
+    <div class="user">
+      <div class="small-3 medium-3 columns">
+        <li><%= user.email %></li>
+      </div>
+      <div class="small-9 columns">
+        <%= button_to "Delete", admin_user_path(:id => user.id), data: { confirm: "Are you sure?" }, method: :delete %>
+      </div>
+    </div>
+  <% end %>
+</ul>

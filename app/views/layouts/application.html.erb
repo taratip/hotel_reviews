@@ -30,6 +30,16 @@
               <li><%= link_to "Sign up", new_user_registration_path %></li>
             <% end %>
           </ul>
+          <ul class="left">
+            <% if user_signed_in? && current_user.admin? %>
+              <li class="has-dropdown">
+                <a href="#">Admin Section</a>
+                <ul class="dropdown">
+                  <li><%= link_to 'Users', admin_users_path %></li>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
       </nav>
     </div>
     <% flash.each do |type, message| %>

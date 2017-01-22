@@ -10,9 +10,13 @@
   <dt>Hotel size: </dt>
   <dd><%= @hotel.number_rooms %></dd>
 </dl>
-<% if !current_user.nil? && @hotel.user == current_user %>
-  <%= link_to "Edit", edit_hotel_path(@hotel) %> |
-  <%= link_to "Delete", @hotel, method: :delete %>
+<% if !current_user.nil? %>
+  <% if @hotel.user == current_user %>
+    <%= link_to "Edit", edit_hotel_path(@hotel) %> |
+    <%= link_to "Delete", @hotel, method: :delete %>
+  <% elsif @hotel.user != current_user && current_user.admin? %>
+    <%= link_to "Delete", @hotel, method: :delete %>
+  <% end %>
 <% end %>
 <br />&nbsp;
 <h3><%= @hotel.reviews.count %> Reviews:</h3>
