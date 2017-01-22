@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-  before_action :authorize_user, except: [:index, :show]
+  before_action :authenticate_user, except: [:index, :show]
 
   def create
     @hotel = Hotel.find(params[:hotel_id])
@@ -34,11 +34,15 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    hotel_id = @review.hotel_id
+    if @review.user == current_user or current_user.admin?  
+      hotel_id = @review.hotel_id
 
-    @review.destroy
+      @review.destroy
 
-    redirect_to hotel_path(hotel_id), notice: 'The review was deleted.'
+      redirect_to hotel_path(hotel_id), notice: 'The review was deleted.'
+    else
+      render :file => "#{Rails.root}/public/404.html",  :status => 404
+    end
   end
 
   def upvote
@@ -59,7 +63,7 @@ class ReviewsController < ApplicationController
         @review.update_attribute(:score, @review.score + 1)
         redirect_to hotel_path(@review.hotel_id), notice: 'Thank you for your vote!'
       else
-        redirect_to hotel_path(@review.hotel_id), error: 'There was a problem with your vote.'
+        redirect_to hotel_path(@review.hotel_id), notice: 'There was a problem with your vote.'
       end
     end
   end
@@ -108,11 +112,5 @@ class ReviewsController < ApplicationController
   private
   def review_params
     params.require(:review).permit(:rating, :body)
-  end
-
-  def authorize_user
-    if !user_signed_in?
-      raise ActionController::RoutingError.new("Not Found")
-    end
   end
 end

@@ -1,19 +1,25 @@
-<h1><%= @hotel.name %></h1>
+<div id="hotel">
+  <h1><%= @hotel.name %></h1>
 
-<dl>
-  <dt>Image: </dt>
-  <dd><%= image_tag @hotel.image %></dd>
-  <dt>Address: </dt>
-  <dd><%= @hotel.address %></dd>
-  <dt>description: </dt>
-  <dd><%= @hotel.description %></dd>
-  <dt>Hotel size: </dt>
-  <dd><%= @hotel.number_rooms %></dd>
-</dl>
-<% if !current_user.nil? && @hotel.user == current_user %>
-  <%= link_to "Edit", edit_hotel_path(@hotel) %> |
-  <%= link_to "Delete", @hotel, method: :delete %>
-<% end %>
+  <dl>
+    <dt>Image: </dt>
+    <dd><%= image_tag @hotel.image %></dd>
+    <dt>Address: </dt>
+    <dd><%= @hotel.address %></dd>
+    <dt>description: </dt>
+    <dd><%= @hotel.description %></dd>
+    <dt>Hotel size: </dt>
+    <dd><%= @hotel.number_rooms %></dd>
+  </dl>
+  <% if !current_user.nil? %>
+    <% if @hotel.user == current_user %>
+      <%= link_to "Edit", edit_hotel_path(@hotel) %> |
+      <%= link_to "Delete", @hotel, method: :delete %>
+    <% elsif @hotel.user != current_user && current_user.admin? %>
+      <%= link_to "Delete", @hotel, method: :delete %>
+    <% end %>
+  <% end %>
+</div>
 <br />&nbsp;
 <h3><%= @hotel.reviews.count %> Reviews:</h3>
 <hr />

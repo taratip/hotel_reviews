@@ -10,9 +10,13 @@
     </div>
     <div class="row">
       <div class="medium-2 columns">
-        <% if current_user && current_user == review.user %>
-          <%= link_to "Update", edit_review_path(review.id) %> |
-          <%= link_to "Delete", review, method: :delete %>
+        <% if current_user %>
+          <% if current_user == review.user %>
+            <%= link_to "Update", edit_review_path(review.id) %> |
+            <%= link_to "Delete", review, method: :delete %>
+          <% elsif current_user.admin? %>
+            <%= link_to "Delete", review, method: :delete %>
+          <% end %>
         <% end %>
       </div>
     </div>
