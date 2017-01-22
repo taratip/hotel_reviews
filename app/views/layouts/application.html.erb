@@ -29,6 +29,18 @@
               <li><%= link_to 'Sign in', new_user_session_path %></li>
               <li><%= link_to "Sign up", new_user_registration_path %></li>
             <% end %>
+            <li class="has-form">
+              <div class="row collapse">
+                <%= form_tag(search_hotels_path, method: :get) do %>
+                  <div class="large-8 small-9 columns">
+                    <%= text_field_tag 'query', params[:query], placeholder: 'Search for hotels...' %>
+                  </div>
+                  <div class="large-4 small-3 columns">
+                    <%= submit_tag 'Search', class: 'button expand' %>
+                  </div>
+                <% end %>
+              </div>
+          </li>
           </ul>
           <ul class="left">
             <% if user_signed_in? && current_user.admin? %>
