@@ -87,21 +87,4 @@ describe("Vote", function () {
       expect(flash.text()).toBe("Hey there!");
     });
   });
-
-  // describe("updateScore", function() {
-  //   it("update the score to the review section", function() {
-  //     var dummyElement = document.createElement("div");
-  //     dummyElement.setAttribute("id", "vote-2");
-  //     var newSpan = document.createElement("span");
-  //     var newContent = document.createTextNode("0");
-  //     newSpan.appendChild(newContent);
-  //     dummyElement.appendChild(newSpan);
-  //
-  //     document.getElementById = jasmine.createSpy('HTML Element').and.returnValue(dummyElement);
-  //
-  //     voteCreator.updateScore(1, "$('div#vote-2 span')");
-  //
-  //     expect($('div#vote-2 span').text()).toBe("1");
-  //   });
-  // });
 });

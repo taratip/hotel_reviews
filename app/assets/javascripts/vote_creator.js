@@ -5,7 +5,7 @@ var newVoteCreator = function(reviewAttributes, divId) {
       var voteCreatorObject = this;
       var request = $.ajax({
         method: "POST",
-        url: `/api/v1/reviews/${reviewAttributes.id}/upvote`,
+        url: "/api/v1/reviews/" + reviewAttributes.id + "/upvote",
         data: { reviewAttributes }
       });
 
@@ -22,7 +22,7 @@ var newVoteCreator = function(reviewAttributes, divId) {
       var voteCreatorObject = this;
       var request = $.ajax({
         method: "POST",
-        url: `/api/v1/reviews/${reviewAttributes.id}/downvote`,
+        url: "/api/v1/reviews/" + reviewAttributes.id + "/downvote",
         data: { reviewAttributes }
       });
 
@@ -39,7 +39,7 @@ var newVoteCreator = function(reviewAttributes, divId) {
       var voteCreatorObject = this;
       var request = $.ajax({
         method: "POST",
-        url: `/api/v1/reviews/${reviewAttributes.id}/deletevote`,
+        url: "/api/v1/reviews/" + reviewAttributes.id + "/deletevote",
         data: { reviewAttributes }
       });
 

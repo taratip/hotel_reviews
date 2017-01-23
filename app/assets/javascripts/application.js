@@ -18,7 +18,7 @@
 $(function(){ $(document).foundation(); });
 
 $(function() {
-  let buttonPressed;
+  var buttonPressed = '';
 
   $("input.button.info.tiny.radius").click(function() {
     buttonPressed = $(this)[0].id;
@@ -27,7 +27,7 @@ $(function() {
   $("form.upvote").submit(function(event) {
     event.preventDefault();
 
-    let attributes = getAttributes(buttonPressed);
+    var attributes = getAttributes(buttonPressed);
     var voteCreator = newVoteCreator(attributes);
     voteCreator.upVote();
   });
@@ -35,7 +35,7 @@ $(function() {
   $("form.downvote").submit(function(event) {
     event.preventDefault();
 
-    let attributes = getAttributes(buttonPressed);
+    var attributes = getAttributes(buttonPressed);
     var voteCreator = newVoteCreator(attributes);
     voteCreator.downVote();
   });
@@ -43,14 +43,14 @@ $(function() {
   $("form.deletevote").submit(function(event) {
     event.preventDefault();
 
-    let attributes = getAttributes(buttonPressed);
+    var attributes = getAttributes(buttonPressed);
     var voteCreator = newVoteCreator(attributes);
     voteCreator.deleteVote();
   });
 });
 
-let getAttributes = (buttonpressed) => {
-  let idClicked = buttonpressed.substring(buttonpressed.lastIndexOf('-')+1);
-  let attributes = { id: idClicked };
+var getAttributes = function(button_pressed) {
+  var idClicked = button_pressed.substring(button_pressed.lastIndexOf('-')+1);
+  var attributes = { id: idClicked };
   return attributes;
 };
