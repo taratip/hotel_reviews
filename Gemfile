@@ -5,6 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.2.4'
+
 gem 'devise'
 gem 'rails', '~> 5.0.1'
 gem 'pg', '~> 0.18'
@@ -35,5 +37,3 @@ group :production do
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-ruby '2.2.4'
